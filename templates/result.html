@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>AI Health Report</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+<style>
+
+
+body{
+
+background:#f2f7ff;
+
+}
+
+
+.card{
+
+border-radius:20px;
+
+}
+
+
+.score{
+
+font-size:50px;
+
+font-weight:bold;
+
+}
+
+
+
+.ai-box{
+
+background:#fff8dc;
+
+border-left:6px solid #ffc107;
+
+padding:15px;
+
+border-radius:10px;
+
+}
+
+
+
+.dashboard-box{
+
+background:white;
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:0px 5px 20px #ddd;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container mt-5">
+
+
+
+<h1 class="text-center text-primary">
+
+🩺 AI Smart Health Report
+
+</h1>
+
+
+
+<p class="text-center text-muted">
+
+Generated : {{time}}
+
+</p>
+
+
+
+
+
+<div class="card shadow p-4 mt-4">
+
+
+
+
+
+<h2 class="text-center text-{{color}}">
+
+{{risk}}
+
+</h2>
+
+
+
+
+
+<div class="text-center">
+
+
+<div class="score text-primary">
+
+{{health_score}}%
+
+</div>
+
+
+Health Safety Score
+
+
+</div>
+
+
+
+
+
+<hr>
+
+
+
+
+
+<h4>
+
+🤖 AI Confidence
+
+</h4>
+
+
+
+
+<div class="progress">
+
+
+<div class="progress-bar bg-success"
+
+style="width:{{confidence}}%">
+
+
+{{confidence}}%
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<br>
+
+
+
+
+
+
+<h4>
+
+👤 Patient Summary
+
+</h4>
+
+
+
+
+<ul>
+
+
+<li>
+
+Age : {{patient.age}}
+
+</li>
+
+
+<li>
+
+Blood Pressure : {{patient.blood_pressure}}
+
+</li>
+
+
+<li>
+
+Cholesterol : {{patient.cholesterol}}
+
+</li>
+
+
+<li>
+
+Maximum Heart Rate : {{patient.heart_rate}}
+
+</li>
+
+
+</ul>
+
+
+
+
+
+
+
+<div class="ai-box mt-4">
+
+
+
+<h4 class="text-warning">
+
+🤖 Explainable AI Decision
+
+</h4>
+
+
+
+<p>
+
+Top factors responsible for AI prediction:
+
+</p>
+
+
+
+
+<ul>
+
+
+{% for factor,value in top_factors %}
+
+
+<li>
+
+
+<b>{{factor}}</b>
+
+
+:
+
+<span class="badge bg-warning text-dark">
+
+{{value}}%
+
+</span>
+
+
+</li>
+
+
+{% endfor %}
+
+
+
+</ul>
+
+
+
+</div>
+
+
+
+
+
+
+
+<hr>
+
+
+<!-- AI DASHBOARD -->
+
+
+<div class="dashboard-box mt-4">
+
+
+<h3 class="text-center text-primary">
+
+📊 AI Health Dashboard
+
+</h3>
+
+
+
+
+<div class="text-center mt-3">
+
+
+<img
+
+src="{{ url_for('static', filename=chart) }}"
+
+class="img-fluid shadow rounded"
+
+style="max-width:600px;"
+
+
+>
+
+
+</div>
+
+
+
+
+
+<h4 class="mt-4">
+
+🧠 AI Decision Factors
+
+</h4>
+
+
+
+
+<ul>
+
+
+{% for factor,value in top_factors %}
+
+
+<li>
+
+
+<b>{{factor}}</b>
+
+:
+
+<span class="badge bg-primary">
+
+{{value}}%
+
+</span>
+
+
+</li>
+
+
+
+{% endfor %}
+
+
+</ul>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<h4 class="text-danger mt-4">
+
+🚨 Risk Analysis
+
+</h4>
+
+
+
+
+<ul>
+
+
+{% for r in risk_factors %}
+
+
+<li>
+
+{{r}}
+
+</li>
+
+
+{% endfor %}
+
+
+
+</ul>
+
+
+
+
+
+
+<div class="alert alert-warning">
+
+
+{{emergency}}
+
+
+</div>
+
+
+
+
+
+
+
+
+<h4 class="text-success">
+
+💡 AI Health Recommendations
+
+</h4>
+
+
+
+
+<ul>
+
+
+{% for a in advice %}
+
+
+<li>
+
+{{a}}
+
+</li>
+
+
+{% endfor %}
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+<div class="card border-primary mt-4">
+
+
+<div class="card-body text-center">
+
+
+<h5 class="text-primary">
+
+✨ AI Technology Used
+
+</h5>
+
+
+<p>
+
+Machine Learning + Random Forest + Explainable AI + Risk Dashboard
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="text-center mt-4">
+
+
+<a href="/download" class="btn btn-danger btn-lg">
+
+📄 Download AI Health Report PDF
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+<div class="text-center mt-3">
+
+
+<a href="/" class="btn btn-primary btn-lg">
+
+🔄 Analyze New Patient
+
+</a>
+<br><br>
+
+<a href="/history" class="btn btn-dark btn-lg">
+
+📋 View Patient History
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</body>
+
+
+</html>
