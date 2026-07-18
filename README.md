@@ -65,10 +65,9 @@ http://127.0.0.1:5000
 
 
 ## Live Demo
-
-(Add your Render URL here)
+(https://ai-health-assistant-6vhc.onrender.com/)
 
 
 ## GitHub
 
-(Add your GitHub URL here)
+(https://github.com/ketaki889)
