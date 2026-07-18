@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+
+*.db
+
+AI_Health_Report.pdf
+
+static/risk_chart.png
